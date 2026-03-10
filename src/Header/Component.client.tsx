@@ -130,12 +130,11 @@ export const HeaderClient: React.FC<HeaderClientProps> = ({ data }) => {
         </div>
       ) : layout === 'linksCenterLogo' ? (
         // ── Logo centered, links left, CTA right ──────────────────────────
-        <div className="container relative py-4 flex items-center justify-between">
+        <div className="container relative py-4 flex items-center justify-between w-full">
           <HeaderNav data={data} />
-          <div className="absolute left-1/2 -translate-x-1/2">
+          <div className="absolute left-1/2 -translate-x-1/2 flex justify-center">
             <LogoBlock />
           </div>
-          <HeaderNav data={data} />
         </div>
       ) : (
         // ── Default: logo left, links + CTA right ────────────────────────

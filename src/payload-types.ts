@@ -1670,7 +1670,6 @@ export interface Header {
    */
   ctaButton?: {
     enabled?: boolean | null;
-    label?: string | null;
     link?: {
       type?: ('reference' | 'custom') | null;
       newTab?: boolean | null;
@@ -1687,7 +1686,7 @@ export interface Header {
       label: string;
     };
   };
-  layout?: ('logoLeftLinksRight' | 'logoLeftLinksCenter' | 'linksCenterLogo' | 'logoCenterStacked') | null;
+  layout?: ('logoLeftLinksRight' | 'linksCenterLogo') | null;
   sticky?: boolean | null;
   transparentOnTop?: boolean | null;
   showSearch?: boolean | null;
@@ -1765,7 +1764,6 @@ export interface HeaderSelect<T extends boolean = true> {
     | T
     | {
         enabled?: T;
-        label?: T;
         link?:
           | T
           | {

@@ -23,6 +23,17 @@ export const Media: CollectionConfig = {
     read: anyone,
     update: authenticated,
   },
+  hooks: {
+    beforeOperation: [
+      ({ args, operation }) => {
+        if (operation === 'create' && args.req && args.req.file && args.req.file.name) {
+          // Sanitize the filename to prevent Cloudinary upload errors with special characters
+          args.req.file.name = args.req.file.name.replace(/[^a-zA-Z0-9.\-_]/g, '-')
+        }
+        return args
+      },
+    ],
+  },
   fields: [
     {
       name: 'alt',

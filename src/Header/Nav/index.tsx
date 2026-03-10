@@ -36,7 +36,6 @@ export const HeaderNav: React.FC<HeaderNavProps> = ({ data }) => {
   // pull settings with sensible defaults
   const showSearch = data?.showSearch !== false
   const ctaEnabled = (data as any)?.ctaButton?.enabled
-  const ctaLabel   = (data as any)?.ctaButton?.label || 'Subscribe'
   const ctaLink    = (data as any)?.ctaButton?.link
 
   const textColor      = (data as any)?.textColor      || undefined
@@ -103,9 +102,7 @@ export const HeaderNav: React.FC<HeaderNavProps> = ({ data }) => {
         appearance="link"
         className="px-4 py-1.5 rounded-full text-sm font-semibold transition-all hover:opacity-90 active:scale-95 shadow-sm"
         style={{ backgroundColor: ctaBg, color: ctaText, fontSize, fontWeight } as any}
-      >
-        {ctaLabel}
-      </CMSLink>
+      />
     ) : null
 
   // hamburger button (mobile)
@@ -147,9 +144,7 @@ export const HeaderNav: React.FC<HeaderNavProps> = ({ data }) => {
                 appearance="link"
                 className="inline-block w-full text-center px-4 py-2.5 rounded-full text-sm font-semibold"
                 style={{ backgroundColor: ctaBg, color: ctaText } as any}
-              >
-                {ctaLabel}
-              </CMSLink>
+              />
             </div>
           )}
 
@@ -196,19 +191,47 @@ export const HeaderNav: React.FC<HeaderNavProps> = ({ data }) => {
   }
 
   if (layout === 'linksCenterLogo') {
-    // logo is center — nav items go left, CTA+search go right
+    // Split the links dynamically
+    const splitIndex = Math.max(1, Math.ceil(navItems.length / 2))
+    const leftLinks = navItems.slice(0, splitIndex)
+    const rightLinks = navItems.slice(splitIndex)
+
     return (
       <>
-        {/* left: nav items */}
-        <div className="hidden md:flex items-center gap-5">
-          <NavLinks />
+        {/* left: first half of nav items */}
+        <div className="flex-1 flex justify-start items-center">
+          <div className="hidden md:flex items-center gap-5">
+            {leftLinks.map(({ link }: any, i: number) => (
+              <CMSLink
+                key={`left-${i}`}
+                {...link}
+                appearance="link"
+                className="relative group transition-opacity hover:opacity-70"
+                style={linkStyle as any}
+              />
+            ))}
+          </div>
         </div>
-        {/* right: search + CTA + hamburger */}
-        <div className="flex items-center gap-3" ref={menuRef}>
-          <SearchBtn />
-          <CTAButton />
-          <Hamburger />
-          <MobileMenu />
+
+        {/* right: second half of nav items + search + CTA + hamburger */}
+        <div className="flex-1 flex justify-end items-center gap-5" ref={menuRef}>
+          <div className="hidden md:flex items-center gap-5">
+            {rightLinks.map(({ link }: any, i: number) => (
+              <CMSLink
+                key={`right-${i}`}
+                {...link}
+                appearance="link"
+                className="relative group transition-opacity hover:opacity-70"
+                style={linkStyle as any}
+              />
+            ))}
+          </div>
+          <div className="flex items-center gap-3">
+            <SearchBtn />
+            <CTAButton />
+            <Hamburger />
+            <MobileMenu />
+          </div>
         </div>
       </>
     )

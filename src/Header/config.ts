@@ -60,15 +60,7 @@ export const Header: GlobalConfig = {
           label: 'Show CTA button',
           defaultValue: false,
         },
-        {
-          name: 'label',
-          type: 'text',
-          label: 'Button label',
-          defaultValue: 'Subscribe',
-          admin: {
-            condition: (data) => Boolean(data?.ctaButton?.enabled),
-          },
-        },
+
         link({
           appearances: false,
           overrides: {
@@ -90,9 +82,7 @@ export const Header: GlobalConfig = {
       defaultValue: 'logoLeftLinksRight',
       options: [
         { label: 'Logo left · Links right', value: 'logoLeftLinksRight' },
-        { label: 'Logo left · Links center', value: 'logoLeftLinksCenter' },
-        { label: 'Links left · Logo center · CTA right', value: 'linksCenterLogo' },
-        { label: 'Logo center · Links below (stacked)', value: 'logoCenterStacked' },
+        { label: 'Links left · Logo center · Links right', value: 'linksCenterLogo' },
       ],
     },
     {
@@ -138,7 +128,7 @@ export const Header: GlobalConfig = {
       type: 'text',
       label: 'CTA button background color',
       admin: {
-        placeholder: '#6366f1',
+        placeholder: '#10e6d4ff',
       },
     },
     {
