@@ -107,7 +107,7 @@ export const HeaderClient: React.FC<HeaderClientProps> = ({ data }) => {
   // ── Render ─────────────────────────────────────────────────────────────────
   return (
     <header
-      className={`w-full ${positionClass} backdrop-blur-sm`}
+      className={`w-full ${positionClass} bg-background`}
       style={headerStyle}
       {...(theme ? { 'data-theme': theme } : {})}
     >
